@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using TG.Blazor.IndexedDB;
 
 namespace thanks
 {
@@ -19,6 +20,14 @@ namespace thanks
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
+            builder.Services.AddIndexedDB(dbStore => {
+                dbStore.DbName = "ThanksDb";
+                dbStore.Version = 1;
+                dbStore.Stores.Add(new StoreSchema {
+                    Name = "ThanksNotes",
+                    PrimaryKey = new IndexSpec { Name = "Id", KeyPath = "id", Auto = true},
+                });
+            });
             await builder.Build().RunAsync();
         }
     }
