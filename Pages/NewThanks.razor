@@ -1,0 +1,19 @@
+@page "/new"
+
+<h1>New Thanks</h1>
+
+<p>On this day, I am thankful for:</p>
+<textarea class="form-control">
+
+</textarea>
+<br />
+<button class="btn btn-primary" @onclick="Save">Save</button>
+
+@code {
+    private int currentCount = 0;
+
+    private void Save()
+    {
+        System.Console.WriteLine("Saved!");
+    }
+}
