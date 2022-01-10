@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TG.Blazor.IndexedDB;
+using thanks.Services;
 
 namespace thanks
 {
@@ -19,6 +20,7 @@ namespace thanks
             builder.RootComponents.Add<App>("#app");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            builder.Services.AddScoped<IThankService, ThankService>();
 
             builder.Services.AddIndexedDB(dbStore => {
                 dbStore.DbName = "ThanksDb";

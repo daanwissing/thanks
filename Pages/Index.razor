@@ -1,8 +1,18 @@
 ﻿@page "/"
-
+@using thanks.Services
+@inject thanks.Services.IThankService thankService
 <h1>Welcome back</h1>
 
-This is what you were thankful for in the past
+This is what you were thankful for in the past:
 
+<ThankNote note=@note />
 
+@code
+{
+    private ThanksNote note { get; set; }
 
+    public Index()
+    {
+        note = new ThanksNote { Moment = DateTimeOffset.Now, Message = "HELLLOOOOO" };
+    }
+}
