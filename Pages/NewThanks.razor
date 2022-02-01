@@ -1,19 +1,26 @@
 @page "/new"
+@inject IThankService _thankService
 
 <h1>New Thanks</h1>
 
 <p>On this day, I am thankful for:</p>
-<textarea class="form-control">
+<textarea class="form-control" @bind="thankText">
 
 </textarea>
 <br />
 <button class="btn btn-primary" @onclick="Save">Save</button>
 
 @code {
-    private int currentCount = 0;
+    private string thankText = "";
 
     private void Save()
     {
+        Console.WriteLine($"Thanks: {thankText}");
+        _thankService.SaveThanks(new ThanksNote
+        {
+            Message = thankText,
+            Moment = DateTimeOffset.Now,
+        });
         System.Console.WriteLine("Saved!");
     }
 }
